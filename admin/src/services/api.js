@@ -1,0 +1,35 @@
+import axios from 'axios';
+import authService from './authService';
+
+const api = axios.create({
+    baseURL: 'http://localhost:5000/api',
+});
+
+api.interceptors.request.use(
+    (config) => {
+        const admin = authService.getCurrentAdmin();
+        if (admin && admin.token) {
+            config.headers.Authorization = `Bearer ${admin.token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            // Token expired or invalid
+            authService.logout();
+            if (typeof window !== 'undefined') {
+                window.location.href = '/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
+export default api;
