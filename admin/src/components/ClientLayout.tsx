@@ -4,18 +4,35 @@ import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar/Sidebar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'; // Outline icons for UI
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
     const isLoginPage = pathname === '/login';
+
+    useEffect(() => {
+        setMounted(true);
+        // Helper to check auth
+        const checkAuth = () => {
+            const admin = localStorage.getItem('admin');
+            if (!admin && !isLoginPage) {
+                router.push('/login');
+            }
+        };
+        checkAuth();
+    }, [pathname, isLoginPage, router]);
 
     // Close sidebar on route change (mobile)
     useEffect(() => {
         setSidebarOpen(false);
     }, [pathname]);
+
+    // Avoid hydration mismatch by waiting for mount
+    if (!mounted) return null;
 
     if (isLoginPage) {
         return (
