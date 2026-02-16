@@ -23,6 +23,19 @@ const ProductModal = ({ isOpen, onClose, categories, subCategories, onSubmit, lo
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
+    // Reset form when modal opens
+    useEffect(() => {
+        if (isOpen) {
+            setTitle('');
+            setPrompt('');
+            setMainCategoryId('');
+            setSubCategoryId('');
+            setIsPremium(false);
+            setImageFile(null);
+            setImagePreview(null);
+        }
+    }, [isOpen]);
+
     // Filter sub-categories based on main category
     const filteredSubCategories = subCategories.filter((sub: any) => sub.mainCategoryId === mainCategoryId || sub.mainCategoryId._id === mainCategoryId);
 
