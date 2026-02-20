@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Update this to your local IP address
-const BASE_URL = 'http://10.146.172.169:5000/api';
+const BASE_URL = 'https://api.productphotoadmin.online/api';
 
 const api = axios.create({
     baseURL: BASE_URL,
