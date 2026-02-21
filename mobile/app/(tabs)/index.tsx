@@ -11,7 +11,7 @@ import { useRouter, useNavigation } from 'expo-router';
 const { width } = Dimensions.get('window');
 
 // Top Carousel Component
-const Carousel = ({ data, router }) => {
+const Carousel = ({ data, router }: { data: any[], router: any }) => {
     if (!data || data.length === 0) return null;
 
     return (
@@ -157,7 +157,7 @@ export default function Home() {
 
             {/* Top Header */}
             <View style={styles.header}>
-                <Text style={styles.appName}>Pearl Product</Text>
+                <Text style={styles.appName}>Ai Product Photo Prompt Pearl</Text>
                 <TouchableOpacity style={styles.profileButton}>
                     <Ionicons name="settings-outline" size={24} color={COLORS.text} />
                 </TouchableOpacity>
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     },
     appName: {
         color: COLORS.primary,
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: 'bold',
     },
     profileButton: {
