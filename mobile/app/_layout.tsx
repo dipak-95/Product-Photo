@@ -7,6 +7,7 @@ export default function Layout() {
             <Stack.Screen name="sub-categories" options={{ headerShown: false }} />
             <Stack.Screen name="category-products" options={{ headerShown: false }} />
             <Stack.Screen name="product-details" options={{ headerShown: false }} />
+            <Stack.Screen name="settings" options={{ headerShown: false }} />
         </Stack>
     );
 }

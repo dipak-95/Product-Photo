@@ -158,7 +158,10 @@ export default function Home() {
             {/* Top Header */}
             <View style={styles.header}>
                 <Text style={styles.appName}>Ai Product Photo Prompt Pearl</Text>
-                <TouchableOpacity style={styles.profileButton}>
+                <TouchableOpacity
+                    style={styles.profileButton}
+                    onPress={() => router.push('/settings')}
+                >
                     <Ionicons name="settings-outline" size={24} color={COLORS.text} />
                 </TouchableOpacity>
             </View>
